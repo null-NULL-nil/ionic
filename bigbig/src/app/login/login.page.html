@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <a [routerLink]="['']">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </a>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-img src="../../assets/loginlogo.png"> </ion-img>
+    </ion-row>
+    <ion-row>
+        <ion-label>userName</ion-label>
+    </ion-row>
+    <ion-row>
+        <ion-input placeholder="请输入用户名" type="userName"></ion-input>
+    </ion-row>
+    <ion-row>
+        <ion-label>password</ion-label>
+    </ion-row>
+    <ion-row>
+        <ion-input placeholder="请输入密码" type="password"></ion-input>
+    </ion-row>
+    <ion-row>
+        <div style="width:80%;" class="align-self-center">
+            <ion-button color="primary" style="width:100%;">登录</ion-button>
+        </div>
+    </ion-row>
+</ion-content>

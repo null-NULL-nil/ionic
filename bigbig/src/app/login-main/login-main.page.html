@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>登陆主页面</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ion-img src="../../assets/background.png"></ion-img>
+</ion-content>
+<ion-content>
+    <ion-item>
+        <ion-button color="primary" [routerLink]="['/login']">Login</ion-button>
+    </ion-item>
+    <ion-item>
+        <!-- //[routerLink]="['/regeist']" -->
+        <ion-button color="primary" (click)="openModal(template)">Regeist</ion-button>
+    </ion-item>
+</ion-content>
+
+<ng-template #template>
+    <ion-grid>
+
+    </ion-grid>
+    <ion-card class="ion-justify-content-center" style="width: 80%;">
+        <ion-item>
+            <div class="align-self-center">
+                <ion-label>用户须知 </ion-label>
+            </div>
+        </ion-item>
+        <ion-card-content>
+            <div class="align-self-center" style="width: 80%;">
+                我们深知隐私对您的重要性，为了更全面地呈现我们收集和使用您个人信息的相关情况，我们根据最新法律法规的要求，对隐私政策和用户协议进行了详细的修订。当您点击【同意】即表示您已充分阅读、理解并接受更新过的《隐私政策》和《用户协议》的全部内容。请花一些时间熟悉我们的隐私政策，如果您有任何问题，请随时联系我们。
+            </div>
+        </ion-card-content>
+        <ion-item>
+            <ion-button color="primary" (click)="default()">不同意</ion-button>
+            <!-- //[routerLink]="['/regeist']" -->
+            <ion-button color="primary" (click)="regeist()">同意</ion-button>
+        </ion-item>
+    </ion-card>
+</ng-template>
