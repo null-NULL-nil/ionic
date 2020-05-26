@@ -28,7 +28,7 @@ export class LoginMainPage implements OnInit
     default()
     {
         this.modalRef.hide();
-        this.router.navigate(['./regeist']);
+        this.router.navigate(['']);
     }
 
 }

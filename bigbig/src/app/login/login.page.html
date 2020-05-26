@@ -9,24 +9,26 @@
 </ion-header>
 
 <ion-content>
-    <ion-row>
-        <ion-img src="../../assets/loginlogo.png"> </ion-img>
-    </ion-row>
-    <ion-row>
-        <ion-label>userName</ion-label>
-    </ion-row>
-    <ion-row>
-        <ion-input placeholder="请输入用户名" type="userName"></ion-input>
-    </ion-row>
-    <ion-row>
-        <ion-label>password</ion-label>
-    </ion-row>
-    <ion-row>
-        <ion-input placeholder="请输入密码" type="password"></ion-input>
-    </ion-row>
-    <ion-row>
-        <div style="width:80%;" class="align-self-center">
-            <ion-button color="primary" style="width:100%;">登录</ion-button>
-        </div>
-    </ion-row>
+    <form [formGroup]="myForm">
+        <ion-row>
+            <ion-img src="../../assets/loginlogo.png"> </ion-img>
+        </ion-row>
+        <ion-row>
+            <h3 class="d-flex justify-content-center">用户登陆</h3>
+        </ion-row>
+        <ion-row>
+            <ion-input type="userName" id="userName" placeholder="请输入用户名" name="userName" [formControl]="userName">
+            </ion-input>
+        </ion-row>
+        <ion-row>
+            <ion-input type="password" id="password" name="password" placeholder="请输入密码" [formControl]="password">
+            </ion-input>
+        </ion-row>
+        <ion-row>
+            <ion-button class="primary" (click)='login()'>登录</ion-button>
+            <div style="width:80%;" class="align-self-center">
+                <ion-button color="primary" style="width:100%;">登录</ion-button>
+            </div>
+        </ion-row>
+    </form>
 </ion-content>
