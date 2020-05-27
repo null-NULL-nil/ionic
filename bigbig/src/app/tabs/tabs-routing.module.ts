@@ -4,7 +4,8 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
     {
-        path: 'tabs',
+        //当前目录就是http://localhost:8100/tabs
+        path: '',
         component: TabsPage,
         children: [
             {
@@ -21,16 +22,21 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/tabs/tab1',
+                redirectTo: 'tab1',
                 pathMatch: 'full'
-            }
+            },
         ]
     },
-    {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-    }
+    // {
+    //     path: '',
+    //     redirectTo: '/tab1',
+    //     pathMatch: 'full'
+    // },
+    // {
+    //     path: '',
+    //     redirectTo: '',
+    //     pathMatch: 'full'
+    // }
 ];
 
 @NgModule({

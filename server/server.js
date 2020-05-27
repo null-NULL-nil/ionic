@@ -13,8 +13,8 @@ app.all('*', function (req, res, next)
     if (req.method == "OPTIONS") res.send(200);
     else next();
 })
-const index_user = 0;
-const USERS = [];
+var index_user = 0;
+var USERS = [];
 
 ///////////////mysql//////////////
 const connection = mysql.createConnection({
@@ -24,37 +24,18 @@ const connection = mysql.createConnection({
     port: 3306,
     database: 'mojia',
 })
-
-function mysqlconnect()
-{
-    connection.connect(function (err)
-    {
-        if (err)
-        {
-            console.error('error connecting: ' + err);
-            return;
-        }
-        console.log('connected succeed ! ');
-    });
-}
-
+//get  all  user
 function Alluser()
 {
-    mysqlconnect();
     var sql = 'select * from user';
     connection.query(sql, function (error, results, fields)
     {
         if (error)
         {
             console.log(error.message);
-            resp.send(
-                {
-                    succ: false,
-                    msg: '查询用户表失败'
-                }
-            );
             return;
         }
+        console.log(results);
         USERS = [];
         for (let i of results)
         {
@@ -70,8 +51,33 @@ function Alluser()
         }
         console.log('select * from user done !');
     })
-    connection.end();
 }
+
+//登陆验证
+app.post('/authentication', function (req, resp)
+{
+    Alluser();
+    console.log(req.body);
+    console.log(USERS);
+    for (let user of USERS)
+    {
+        if (user.username === req.body.username && user.password === req.body.password)
+        {
+            resp.send(
+                {
+                    succ: true,
+                }
+            );
+            resp.end();
+            return;
+        }
+    }
+    resp.send({
+        succ: false,
+        msg: '用户名或密码错误'
+    });
+    resp.end();
+});
 
 app.get('/users', function (req, resp)
 {
@@ -100,31 +106,6 @@ app.post('/users', function (req, resp)
             msg: '找不到用户'
         }
     );
-    resp.end();
-});
-
-app.post('/authentication', function (req, resp)
-{
-    Alluser();
-    console.log(req.body);
-    for (let user of USERS)
-    {
-        if (user.username === req.body.username && user.password === req.body.password)
-        {
-            resp.send(
-                {
-                    succ: true,
-                }
-            );
-        } else
-        {
-            resp.send(
-                {
-                    succ: false,
-                    msg: '用户名或密码错误'
-                });
-        }
-    }
     resp.end();
 });
 
@@ -190,6 +171,20 @@ app.delete('/user/:id', function (req, resp)
 ///////////////////////////////////////////////////
 app.listen(8080, function ()
 {
-    console.log('服务器在8080端口启动!');
+    mysqlconnect();
+    Alluser();
+    console.log('服务器在8080端口启动!  mysql  connect!');
 });
-//////////////////////////////////////////////admin
+//数据库连接  不断开
+function mysqlconnect()
+{
+    connection.connect(function (err)
+    {
+        if (err)
+        {
+            console.error('error connecting: ' + err);
+            return;
+        }
+        console.log('connected succeed ! ');
+    });
+}
